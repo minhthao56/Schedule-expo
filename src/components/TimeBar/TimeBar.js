@@ -9,9 +9,14 @@ export default function TimeBar() {
     <View style={styles.container}>
       {dataDay.map((day, i) => {
         return (
-          <Text style={day === now ? styles.now : styles.day} key={i}>
-            {moment().day(day).format("ddd")}
-          </Text>
+          <View style={day === now ? styles.now : styles.time} key={i}>
+            <Text style={day === now ? styles.dateNow : styles.date}>
+              {moment().day(day).format("MM/DD")}
+            </Text>
+            <Text style={day === now ? styles.dayNow : styles.day}>
+              {moment().day(day).format("ddd")}
+            </Text>
+          </View>
         );
       })}
     </View>
@@ -23,16 +28,35 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     borderBottomWidth: 0.5,
-    borderBottomColor: "#cccccc",
+    borderBottomColor: "#eeeeee",
   },
   now: {
     backgroundColor: "#E24040",
-    color: "white",
-    padding: 12,
+    padding: 8,
     borderBottomLeftRadius: 16,
     borderBottomRightRadius: 16,
   },
+  time: {
+    padding: 8,
+  },
+  date: {
+    textAlign: "center",
+    fontSize: 11,
+    marginBottom: 3,
+    fontWeight: "700",
+  },
+  dateNow: {
+    color: "white",
+    textAlign: "center",
+    fontSize: 11,
+    marginBottom: 2,
+    fontWeight: "700",
+  },
   day: {
-    padding: 12,
+    textAlign: "center",
+  },
+  dayNow: {
+    color: "white",
+    textAlign: "center",
   },
 });

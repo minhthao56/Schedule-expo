@@ -1,6 +1,6 @@
 import React from "react";
 import { SafeAreaView, StatusBar } from "react-native";
-import { Header, TimeBar } from "../../components";
+import { Header, TimeBar, CardSubject } from "../../components";
 
 export default function Home() {
   return (
@@ -8,6 +8,7 @@ export default function Home() {
       <StatusBar backgroundColor="#E24040" />
       <Header />
       <TimeBar />
+      <CardSubject />
     </SafeAreaView>
   );
 }

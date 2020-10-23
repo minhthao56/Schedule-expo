@@ -1,44 +1,75 @@
-import React from "react";
-import { View, Text, StyleSheet, Animated  } from "react-native";
-import {
-  Collapse,
-  CollapseHeader,
-  CollapseBody,
-} from "accordion-collapse-react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { View, Text, StyleSheet, TextInput } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import Accordion from "react-native-collapsible/Accordion";
 
+const SECTIONS = [
+  {
+    title: "History",
+    content:
+      "Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... ",
+  },
+  {
+    title: "Gygeophy",
+    content:
+      "Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... ",
+  },
+];
 
 export default function CardSubject() {
+  const [activeSections, setActiveSections] = useState([]);
+  const [valueNote, setValuaNote] = useState("");
+  const _renderHeader = (section, index) => {
+    return (
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Text style={{ fontSize: 20, color: "#E24040" }}>{index + 1}. </Text>
+        <Feather name="book" size={16} color="#888888" />
+        <Text style={{ fontSize: 16, color: "#888888" }}>{section.title}</Text>
+      </View>
+    );
+  };
 
-    
-const opacity = new Animated.Value(0);
-Animated.timing(opacity, {
-  toValue: 1,
-  duration: 500
-}).start();
+  const _renderContent = (section) => {
+    return (
+      <View>
+        {/* <Text>{section.content}</Text> */}
+        <TextInput
+          multiline={true}
+          numberOfLines={4}
+          onChangeText={(text) => setValuaNote({ text })}
+          value={valueNote}
+          placeholder="Note..."
+          defaultValue={section.content}
+        />
+      </View>
+    );
+  };
 
+  const _updateSections = (activeSections) => {
+    setActiveSections(activeSections);
+  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.number}>1</Text>
-      <Collapse style={styles.collapse}>
-        <CollapseHeader>
-          <View style={styles.header}>
-            <Feather name="book" size={22} color="#aaaaaa" />
-            <Text>Click here</Text>
-          </View>
-        </CollapseHeader>
-        <CollapseBody style={styles.collapseBody}>
-          <Text>Ta daa!</Text>
-        </CollapseBody>
-      </Collapse>
+      <View style={styles.containerAccordion}>
+        <Accordion
+          sections={SECTIONS}
+          activeSections={activeSections}
+          renderHeader={_renderHeader}
+          renderContent={_renderContent}
+          onChange={_updateSections}
+          sectionContainerStyle={styles.accordion}
+        />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  collapse: {
-    width: "65%",
+  accordion: {
+    marginBottom: 8,
+    borderRadius: 30,
+    backgroundColor: "white",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -47,28 +78,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    backgroundColor: "white",
-    borderRadius: 30,
-    padding: 8,
+    padding: 16,
+    marginTop: 16,
   },
   container: {
-    alignItems: "center",
-    marginTop: 16,
+    display: "flex",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    width: "100%",
   },
-  header: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  number: {
-    fontSize: 30,
-    color: "#E24040",
-    marginRight: 12,
-  },
-  collapseBody: {
-    height: 300,
+  containerAccordion: {
+    width: "75%",
   },
 });

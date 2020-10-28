@@ -14,6 +14,21 @@ const SECTIONS = [
     content:
       "Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... ",
   },
+  {
+    title: "Math",
+    content:
+      "Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... ",
+  },
+  {
+    title: "Phycical",
+    content:
+      "Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... ",
+  },
+  {
+    title: "Biocal",
+    content:
+      "Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... Lorem ipsum... ",
+  },
 ];
 
 export default function CardSubject() {
@@ -39,7 +54,6 @@ export default function CardSubject() {
           onChangeText={(text) => setValuaNote({ text })}
           value={valueNote}
           placeholder="Note..."
-          defaultValue={section.content}
         />
       </View>
     );
